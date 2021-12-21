@@ -82,7 +82,7 @@ DATABASES = {
         'CHARSET': 'utf8',
         'NAME': 'Eshop',
         'USER': 'root',
-        'PASSWORD': 'xzz1045189077',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -133,7 +133,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'pikapika_999@163.com'
-EMAIL_HOST_PASSWORD = 'GNDAUGKAFXCWVGCM'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
