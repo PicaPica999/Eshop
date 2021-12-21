@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+
+<form method="post" action="#">
+    {% csrf_token %}
+
+    <label>
+        账号
+        <input type="text" name="account">{{ obj.errors.user.0 }}
+    </label>
+    <br>
+
+    <label>
+        密码
+        <input type="password" name="password">{{ obj.errors.pwd0.0 }}
+    </label>
+    <br>
+
+    验证码
+    <input type="text" name="captcha" placeholder="验证码">
+    <input value="{{ hashkey }}" name="hashkey" type="hidden" id="id_captcha_0">
+    <img class="captcha" src="{{ image_url }}" alt="刷新" id="id_captcha">
+    <br>
+
+    <button type="submit">登录</button>
+    <a href="/register/" style="text-decoration:none;">还没有账号？注册一个</a>
+
+</form>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+<script>
+     //点击刷新验证码
+    $(function () {
+        $('.captcha').css({
+            'cursor': 'pointer'
+        });
+        $('.captcha').click(function () {
+            console.log('click');
+            $.get("{% url 'captcha-refresh' %}",
+                function (result) {
+                    $('.captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['key'])
+                });
+        });
+    })
+</script>
+<form method="post" action="/homepage/">
+    {% csrf_token %}
+    <button type="submit">返回首页</button>
+</form>
+
+{% if error0 %}
+    账号不存在
+{% endif %}
+{% if error1 %}
+    密码错误
+{% endif %}
+{% if error2 %}
+    验证码错误
+{% endif %}
+
+</body>
+</html>

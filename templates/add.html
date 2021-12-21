@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddImg</title>
+</head>
+<body>
+<a href="/my/" style="text-decoration:none;">《《《</a><br>
+<h1>添加头像</h1>
+<form method="post" enctype="multipart/form-data" action="/add/">
+    {% csrf_token %}
+    {{ af.as_p }}
+    <input type="submit" value="OK"/>
+</form>
+</body>
+</html>

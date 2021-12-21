@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditEmail</title>
+</head>
+<body>
+<a href="/my/MyDetail/" style="text-decoration:none;">《《《</a>
+<form method="post" action="">
+    {% csrf_token %}
+    邮箱
+    <br><input type="text" name="emails">
+    <button type="submit" name="email">发送验证码</button><br>
+    验证码
+    <br><input type="text" name="code"><br>
+    <button type="submit" name="Edit">修改</button>
+</form>
+
+{% if error %}
+{{error}}
+{% endif %}
+</body>
+</html>

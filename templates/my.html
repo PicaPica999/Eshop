@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my</title>
+</head>
+<body>
+
+<table cellspacing="10">
+    <tr>
+        <td><a href="/homepage/" style="text-decoration:none;">eshop</a></td>
+        <td><a href="/shopping_cart/" style="text-decoration:none;">购物车</a></td>
+        <td><a href="#" style="text-decoration:none;"><h2>我的</h2></a></td>
+    </tr>
+</table>
+{% if request.session.is_login %}
+    <table cellspacing="10">
+        <tr>
+            <td>
+                {% if user.headimg %}
+                    <img src="/media/{{ user.headimg }}" width="100" height="100">
+                {% else %}
+                    <a href="/add/" style="text-decoration:none;">添加头像</a>
+                {% endif %}
+            </td>
+            <td><a href="MyDetail/" style="text-decoration:none;"><h2>{{ request.session.nickname }}</h2></a></td>
+            <td><h3>欢迎！</h3></td>
+            <td><a href="/logout/" style="text-decoration:none;">登出</a></td>
+        </tr>
+        {% if request.session.identity == 'seller' %}
+            <tr>
+                <td><a href="addGoods/" style="text-decoration:none;">上传商品</a></td>
+            </tr>
+        {% endif %}
+        <tr>
+            <a href="/real_order/" style="text-decoration:none;">我的订单</a>
+        </tr>
+    </table>
+{% else %}
+    <a href="/login/" style="text-decoration:none;">请先登录</a>
+
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditData</title>
+</head>
+<body>
+<a href="/my/MyDetail/" style="text-decoration:none;">《《《</a>
+<form method="post" action="">
+    {% csrf_token %}
+    昵称
+    <br><input TYPE="text" name="nickname" value={{ request.session.nickname }}><br>
+    性别
+    <br><select id="sex" name="sex">
+    <option value=0>男</option>
+    <option value=1>女</option>
+    </select><br>
+    生日
+    <br><input TYPE="date" name="birth" value={{ request.session.birth }}><br>
+    <button type="submit" name="edit">确认修改</button>
+</form>
+{% if error %}
+{{error}}
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+
+<table cellspacing="10">
+    <tr>
+        <td><a href="#" style="text-decoration:none;"><h2>E</h2></a></td>
+        <td><a href="/shopping_cart/" style="text-decoration:none;">购物车</a></td>
+        <td><a href="/my/" style="text-decoration:none;">我的</a></td>
+    </tr>
+</table>
+
+<form method="post" action="">
+    {% csrf_token %}
+    搜索：<input type="text" name="search">
+    <button type="submit" name="ture">搜索</button>{{ error }}
+</form>
+<table border="0" cellpadding="10">
+    {% for line in good %}
+        {% if line.state == 1 %}
+            <tr style="background: darkgray">
+                <th>{{ line.title }}</th>
+                <th>类型：{{ line.label }}</th>
+                <th>卖家：{{ line.seller }}</th>
+            </tr>
+            <tr>
+                <td colspan="4" style="background: darkgray">
+                    <a href="detail/{{ line.id }}/" style="text-align:left;text-decoration:none;">详情</a>
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
+<ul class="pagination">
+    {% if good.has_previous %}
+        <li><a href="?page={{ goods.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in good.paginator.page_range %}
+        {% if good.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">当前页</span></span></li>
+        {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if good.has_next %}
+        <li><a href="?page={{ good.next_page_number }}">&raquo;</a></li>
+    {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+</body>
+</html>

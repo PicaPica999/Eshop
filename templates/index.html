@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+
+<p>
+<h1>欢迎使用pikapika_999的eshop平台</h1></p>
+<a href="homepage/" style="text-decoration:none;">先看看</a>
+{% if request.session.is_login %}
+    <h2>{{ request.session.nickname }}</h2>
+    <h3>欢迎!</h3>
+{% else %}
+    <a href="login/" style="text-decoration:none;">登录</a>
+    <a href="register/" style="text-decoration:none;">注册</a>
+{% endif %}
+</body>
+</html>

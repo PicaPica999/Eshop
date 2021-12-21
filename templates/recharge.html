@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>recharge</title>
+</head>
+<body>
+<a href="/my/MyDetail/" style="text-decoration:none;">《《《</a>
+<h1>充值</h1>
+<form method="post" action="">
+    {% csrf_token %}
+    可用的的余额：{{ request.session.balance }}
+    <table cellspacing="0">
+        <tr>
+            <td><button type="submit" name="6"><h3>6</h3>E币</button></td>
+            <td><button type="submit" name="18"><h3>18</h3>E币</button></td>
+            <td><button type="submit" name="68"><h3>68</h3>E币</button></td>
+        </tr>
+        <tr>
+            <td><button type="submit" name="233"><h3>233</h3>E币</button></td>
+            <td><button type="submit" name="648"><h3>648</h3>E币</button></td>
+            <td><button type="submit" name="998"><h3>998</h3>E币</button></td>
+        </tr>
+    </table>
+    <input type="text" name="money" placeholder="自定义E币数量（1-100000元）"><br>
+    1E币=1.00元人民币
+    <button type="submit" name="recharge">去充值</button>
+</form>
+{% if error %}
+{{error}}
+{% endif %}
+</body>
+</html>

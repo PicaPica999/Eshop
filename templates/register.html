@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body>
+<a href="/" style="text-decoration:none;">《《《</a>
+<form method="post" action="">
+    {% csrf_token %}
+    账号
+    <br><input type="text" name="account"><br>
+    昵称
+    <br><input TYPE="text" name="nickname"><br>
+    密码
+    <br><input TYPE="password" name="pwd0"><br>
+    确认密码
+    <br><input TYPE="password" name="pwd1"><br>
+    邮箱
+    <br><input type="text" name="emails">
+    <button type="submit" name="email">发送验证码</button><br>
+    验证码
+    <br><input type="text" name="code"><br>
+    生日
+    <br><input TYPE="date" name="birth"><br>
+    性别
+    <br><select id="sex" name="sex">
+    <option value="请选择">请选择</option>
+    <option value=0>男</option>
+    <option value=1>女</option>
+    </select><br>
+    身份
+    <br><select id="identity" name="identity">
+    <option value="请选择">请选择</option>
+    <option value="buyer">顾客</option>
+    <option value="seller">商家</option>
+    </select><br>
+    <button type="submit" name="register">注册</button>
+</form>
+
+<form method="post" action="/login/">
+    {% csrf_token %}
+    <button type="submit">已有帐号，登录</button>
+</form>
+{% if error %}
+{{error}}
+{% endif %}
+
+{% if messages %}
+<script>
+        {% for msg in messages %}
+            alert('{{ msg.message }}');
+        {% endfor %}
+    </script>
+{% endif %}
+</body>
+</html>

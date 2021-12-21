@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyDetail</title>
+</head>
+<body>
+<a href="/my/" style="text-decoration:none;">《《《</a><br>
+<tr>
+    <td>
+        {% if user.headimg %}
+            <img src="/media/{{ user.headimg }}" width="100" height="100">
+            <a href="/add/" style="text-decoration:none;">修改头像</a>
+        {% else %}
+            <a href="/add/" style="text-decoration:none;">添加头像</a>
+        {% endif %}
+    </td>
+    <td><a href="EditData/" style="text-decoration:none;">编辑资料</a></td>
+</tr>
+<br>
+
+<h2>{{ request.session.nickname }}</h2>
+<ul>
+    <li>账号：{{ request.session.account }}</li>
+    <li>性别：{{ request.session.sex }}</li>
+    <li>生日：{{ request.session.birth }}</li>
+    <li>邮箱：{{ request.session.email }}</li>
+    <a href="EditEmail/">修改</a>
+    {% if request.session.identity == 'buyer' %}
+        <li>余额：{{ request.session.balance }}</li>
+        <a href="recharge/">+</a>
+    {% endif %}
+</ul>
+{% if request.session.identity == 'buyer' %}
+    <details>
+        <summary>地址</summary>
+        <ul>
+            {% for line in addresses %}
+                <li>{{ line.address }}</li>
+            {% endfor %}
+            +<a href="AddAddress/" style="text-decoration:none;">添加地址</a>
+        </ul>
+    </details>
+{% endif %}
+</body>
+</html>

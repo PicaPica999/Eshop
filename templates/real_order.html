@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>order</title>
+</head>
+<body>
+<a href="/my/" style="text-decoration:none;">《《《</a><br>
+<h1>订单</h1><br>
+<h3>{{ request.session.nickname }}</h3>
+<h5>{{ request.session.email }}</h5><br>
+{% for line in order %}
+    <table cellpadding="10" cellspacing="1">
+        <tr><h3>{{ line.goods }}</h3></tr>
+        <tr>
+            <td>金额：</td>
+            <td>{{ line.price }} E币</td>
+        </tr>
+        <tr>
+            <td>数量：</td>
+            <td>{{ line.number }}</td>
+        </tr>
+        <tr>
+            <td>收货地址：</td>
+            <td>{{ line.receiving_address }}</td>
+        </tr>
+        <tr>
+            <td>订单号:</td>
+            <td>{{ line.uid }}</td>
+        </tr>
+        <tr>
+            <td>状态：</td>
+            <td>
+                {% if line.state == 0 %}
+                    买家已付款
+                {% else %}
+                    卖家已发货
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+{% endfor %}
+{% if request.session.identity == 'seller' %}
+    <form method="post">
+        {% csrf_token %}
+        <button name="pay">发货</button>
+    </form>
+{% endif %}
+</body>
+</html>

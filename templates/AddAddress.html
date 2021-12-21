@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddAddress</title>
+</head>
+<body>
+<h1>添加地址</h1>
+<form method="post" action="">
+    {% csrf_token %}
+    <input type="text" name="address">
+    <button type="submit">确定</button>
+</form>
+</body>
+</html>

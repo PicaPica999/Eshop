@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shopping_cart</title>
+</head>
+<body>
+
+<table cellspacing="10">
+    <tr>
+        <td><a href="/homepage/" style="text-decoration:none;">eshop</a></td>
+        <td><a href="#" style="text-decoration:none;"><h2>购物车</h2></a></td>
+        <td><a href="/my/" style="text-decoration:none;">我的</a></td>
+    </tr>
+</table>
+
+<table border="0" cellpadding="10">
+    {% for line in obj %}
+        <tr>
+            <th>{{ line.title }}</th>
+            <th>卖家：{{ line.seller }}</th>
+            <th><a href="/homepage/detail/{{ line.good }}/" style="text-align:left;text-decoration:none;">详情</a></th>
+            <th>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <button type="submit" name='delete' value={{ line.id }}>-</button>
+                </form>
+            </th>
+        </tr>
+    {% endfor %}
+    {% if obj %}
+        <tr><a href="/order/">购买</a></tr>
+    {% endif %}
+</table>
+</body>
+</html>

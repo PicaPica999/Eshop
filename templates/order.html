@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>order</title>
+</head>
+<body>
+<a href="/homepage/" style="text-decoration:none;">《《《</a><br>
+<h1>填写订单</h1><br>
+<h3>{{ request.session.nickname }}</h3>
+<h5>{{ request.session.email }}</h5><br>
+<form method="post">
+    {% csrf_token %}
+    {% for line in good %}
+        <table cellpadding="10" cellspacing="1">
+            <tr>
+                <td><h3>{{ line.title }}</h3></td>
+                <td>
+                    <button type="submit" name='delete' value={{ line.id }}>-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ line.price }} E币</td>
+                <td>数量：<input type="integer" name='number' placeholder="库存{{ line.inventory }}"></td>
+            </tr>
+            <tr>
+                <td>余额：{{ request.session.balance }} E币</td>
+                <td><a href="/my/MyDetail/recharge/" style="text-decoration:none;">+</a></td>
+            </tr>
+        </table>
+    {% endfor %}
+    <select name="address" id="address">
+        {% for line in addresses %}
+            <option value={{ line.address }}>{{ line.address }}</option>
+        {% endfor %}
+    </select><br>
+    <button name="pay">支付</button>
+</form>
+{{ error }}
+</body>
+</html>

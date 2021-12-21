@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<a href="/homepage/" style="text-decoration:none;">《《《</a>
+<table border="1" cellpadding="10">
+    <tr>
+        {% if good.img is not None%}
+        <img src="/media/img/{{ good.img }}" width="300" height="300">
+        {% endif %}
+    </tr>
+    <tr>
+        <th>商品：</th>
+        <th colspan="3" style="text-align: left">
+            {{ good.title }}
+        </th>
+    </tr>
+    <tr>
+        <th>库存：{{ good.inventory }}</th>
+        <th>价格：{{ good.price }}</th>
+        <th>标签：{{ good.label }}</th>
+    </tr>
+    <tr>
+        <th>详情：</th>
+        <th colspan="3" style="text-align: left">
+            {{ good.details }}
+        </th>
+    </tr>
+</table>
+<form method="post" action="">
+    {% csrf_token %}
+    <button type="submit" name="buy">购买</button>
+    <button type="submit" name="add">添加至购物车</button>
+</form>
+<table cellpadding="0" cellspacing="0">
+    {% for line in obj %}
+        <tr>
+            <td><p>{{ line.owner }}({{ line.time }}):</p></td>
+            <td>{{ line.content }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<form method="post" action="">
+    {% csrf_token %}
+    <label for="content">评价</label><br>
+    {{ commentForm.media }}
+    {{ commentForm.content }}
+    <button type="submit" name="comment">评论</button>
+</form>
+</body>
+</html>
